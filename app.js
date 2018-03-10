@@ -24,21 +24,23 @@ app.set("view engine", "ejs");
 // SCHEMA SEtUP
 var campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 });
 
 var campground = mongoose.model("Campground", campgroundSchema);
-// campground.create({
-//     name: "Granite Hill",
-//     image: "https://pixabay.com/get/e136b80728f31c2ad65a5854ee4d459fe270e7c818b4134194f6c379a0ea_340.jpg"
-// },function(err,campground){
-//   if(err){
-//       console.log(err);
-//   }else{
-//       console.log("newly created campground :");
-//       console.log(campground);
-//   }
-// });
+campground.create({
+    name: "Granite Hill",
+    image: "https://pixabay.com/get/e136b80728f31c2ad65a5854ee4d459fe270e7c818b4134194f6c379a0ea_340.jpg",
+    description:"This is a huge granite hill, no bathrooms. no water. beautiful granite!"
+},function(err,campground){
+  if(err){
+      console.log(err);
+  }else{
+      console.log("newly created campground :");
+      console.log(campground);
+  }
+});
 
 
 
@@ -82,6 +84,11 @@ app.post("/campgrounds", function (req, res) {
 
 app.get("/campgrounds/new", function (req, res) {
     res.render("new");
+});
+
+app.get("/campgrounds/:id",function(req,res){
+    //find the campground with provided id
+    //render show template with that campground
 });
 app.listen(3000, function () {
     console.log(" the YelpCamp serverS has started");
