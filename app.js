@@ -1,6 +1,7 @@
-var express = require("express");
-var app = express();
-var bodyparser = require("body-parser");
+var express = require("express"),
+    app = express(),
+    bodyparser = require("body-parser"),
+    mongoose = require("mongoose")
 var campgrounds = [{
     name: "Salman Creek",
     image: "https://pixabay.com/get/ec31b90f2af61c2ad65a5854ee4d459fe270e7c818b4134194f6c379a0ea_340.jpg"
@@ -15,9 +16,14 @@ var campgrounds = [{
 }
 ];
 
-
+mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyparser.urlencoded({extended:true}));
 app.set("view engine", "ejs");
+// SCHEMA SEtUP
+
+
+
+
 app.get("/", function (req, res) {
     res.render("landing");
 });
