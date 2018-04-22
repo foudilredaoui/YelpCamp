@@ -1,7 +1,9 @@
 var express = require("express"),
     app = express(),
     bodyparser = require("body-parser"),
-    mongoose = require("mongoose")
+    mongoose = require("mongoose"),
+    campground = require("./models/campground")
+    
 // var campgrounds = [{
 //     name: "Salman Creek",
 //     image: "https://pixabay.com/get/ec31b90f2af61c2ad65a5854ee4d459fe270e7c818b4134194f6c379a0ea_340.jpg"
@@ -21,17 +23,10 @@ app.use(bodyparser.urlencoded({
     extended: true
 }));
 app.set("view engine", "ejs");
-// SCHEMA SEtUP
-var campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
 
-var campground = mongoose.model("Campground", campgroundSchema);
 // campground.create({
 //     name: "Granite Hill",
-//     image: "https://pixabay.com/get/e136b80728f31c2ad65a5854ee4d459fe270e7c818b4134194f6c379a0ea_340.jpg",
+//     image: "https://pixabay.com/get/ec31b90f2af61c22d2524518b7444795ea76e5d004b0144391f3c67ca4efb4_340.jpg",
 //     description:"This is a huge granite hill, no bathrooms. no water. beautiful granite!"
 // },function(err,campground){
 //   if(err){
