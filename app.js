@@ -2,7 +2,10 @@ var express = require("express"),
     app = express(),
     bodyparser = require("body-parser"),
     mongoose = require("mongoose"),
-    campground = require("./models/campground")
+    campground = require("./models/campground"),
+    // Comment = require("./models/comment"),
+    // User = require("./models/user"),
+    seedDB = require("./seeds")
     
 // var campgrounds = [{
 //     name: "Salman Creek",
@@ -17,7 +20,7 @@ var express = require("express"),
 //     image: "https://pixabay.com/get/ea34b50f2cf4013ed95c4518b7444795ea76e5d004b0144395f1c77ba7eab2_340.jpg"
 // }
 // ];
-
+seedDB();
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyparser.urlencoded({
     extended: true
