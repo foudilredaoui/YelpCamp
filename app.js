@@ -3,17 +3,18 @@ var express = require("express"),
     bodyparser = require("body-parser"),
     mongoose = require("mongoose"),
     campground = require("./models/campground"),
-    // Comment = require("./models/comment"),
+    Comment = require("./models/comment"),
     // User = require("./models/user"),
     seedDB = require("./seeds")
     
 
-seedDB();
+
 mongoose.connect("mongodb://localhost/yelp_camp");
 app.use(bodyparser.urlencoded({
     extended: true
 }));
 app.set("view engine", "ejs");
+seedDB();
 
 app.get("/", function (req, res) {
     res.render("landing");
@@ -24,7 +25,7 @@ app.get("/campgrounds", function (req, res) {
         if (err) {
             Console.log(err);
         } else {
-            res.render("index", {
+            res.render("campgrounds/index", {
                 campgrounds: campgrounds
             });
         }
@@ -55,7 +56,7 @@ app.post("/campgrounds", function (req, res) {
 });
 
 app.get("/campgrounds/new", function (req, res) {
-    res.render("new");
+    res.render("campgrounds/new");
 });
 
 app.get("/campgrounds/:id", function (req, res) {
@@ -65,11 +66,26 @@ app.get("/campgrounds/:id", function (req, res) {
             console.log(err);
         } else {
             //render show template with that campground
-            res.render("show",{campground:foundCampground});
+            res.render("campgrounds/show",{campground:foundCampground});
         }
     });
 
 });
+//==================
+// COMMENTS ROUTES
+//==================
+app.get("/campgrounds/:id/comments/new",function(req,res){
+    //find campgrouond by id
+    campground.findById(req.params.id,function(err,campground){
+        if (err) {
+            console.log(err);
+        }else{
+            // res.render("comments/new",{campground: campground});
+            console.log(campground);
+        }
+    })
+});
+
 app.listen(3000, function () {
     console.log(" the YelpCamp serverS has started");
 });
